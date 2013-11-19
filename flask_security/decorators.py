@@ -167,7 +167,7 @@ def roles_required(*roles):
             for perm in perms:
                 if not perm.can():
                     if 'admin' in roles:
-                        return redirect('/login_admin')
+                        return redirect('/admin_login')
                     return _get_unauthorized_view()
             return fn(*args, **kwargs)
         return decorated_view
