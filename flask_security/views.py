@@ -268,6 +268,7 @@ def reset_password(token):
     form = _security.reset_password_form()
 
     if form.validate_on_submit():
+        form.user = current_user
         after_this_request(_commit)
         update_password(user, form.password.data)
         do_flash(*get_message('PASSWORD_RESET'))
