@@ -42,7 +42,10 @@ def _render_json(form, include_auth_token=False):
         response = dict(errors=form.errors)
     else:
         code = 200
-        response = dict(user=dict(id=str(form.user.id)))
+        try:
+            response = dict(user=dict(id=str(form.user.id)))
+        except AttributeError, e:
+            response = dict(user=dict(id=str(current_user.id)))
         if include_auth_token:
             token = form.user.get_auth_token()
             response['user']['authentication_token'] = token
